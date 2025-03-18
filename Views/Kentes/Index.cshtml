@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TheRealKente.Models.Kente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Index</h1>
+
+@if (TempData["Alert"] != null)
+{
+    <div class ="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @TempData["Alert"]
+    </div>
+}   
+
+<p>
+    <a asp-action="Create">Add Stock</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>@Html.DisplayNameFor(model => model.KenteID)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Description)</th>*@
+            <th>@Html.DisplayNameFor(model => model.StockQuantity)</th>
+            <th>@Html.DisplayNameFor(model => model.KentePrice)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class = "align-middle">
+              <img class= "rounded-square" src ="@item.ProductImageURL" alt= "@item.Description" style=" max-width:150px "/>
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.KenteID)
+            </td>
+            @*<td class="align-middle">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td >*@
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.StockQuantity)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.KentePrice)
+            </td>
+            
+            <td>
+                    <a asp-action="Edit" asp-controller="Kentes" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit</a> |
+                    <a asp-action="Details" asp-controller="Kentes" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details</a> |
+                    <a asp-action="Delete" asp-controller="Kentes" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

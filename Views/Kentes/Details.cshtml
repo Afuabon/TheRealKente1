@@ -1,0 +1,48 @@
+﻿@model TheRealKente.Models.Kente
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Product Details</h1>
+
+<div>
+    <h4>Kente</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KenteID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KenteID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StockQuantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StockQuantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KentePrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KentePrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductImageURL)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductImageURL)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Details" asp-controller="Kentes" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
