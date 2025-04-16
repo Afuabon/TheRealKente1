@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using TheRealKente.Data;
 using TheRealKente.Models;
 
+
 namespace TheRealKente.Controllers
 {
     public class KentesController(ApplicationDbContext context) : Controller
@@ -18,12 +19,14 @@ namespace TheRealKente.Controllers
 
 
         // GET: Kentes
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.Kentes.ToListAsync());
         }
 
         // GET: Kentes/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

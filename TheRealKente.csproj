@@ -8,11 +8,17 @@
   
   </PropertyGroup>
 
-	<PropertyGroup>
+ <PropertyGroup>
 
 	<ResolveStaticWebAssetsInputsDependsOn>RemoveIdentityAssets</ResolveStaticWebAssetsInputsDependsOn>
 	
  </PropertyGroup>
+
+	<PropertyGroup>
+		<EnvironmentName>Development</EnvironmentName>
+	</PropertyGroup>
+
+	
 
 	<Target Name="RemoveIdentityAssets">
 		<ItemGroup>

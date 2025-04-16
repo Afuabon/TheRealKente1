@@ -1,0 +1,21 @@
+﻿
+@model TheRealKente.Models.UserProfile
+
+
+@{
+    ViewData["Title"] = "UserProfile";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <h2>@ViewData["Title"].</h2>
+        </div>
+        <div class="col-md-4">
+            <h3>@Model.UserName</h3>
+            <p>
+                <i class="glyphicon glyphicon-envelope"></i> @Model.EmailAddress
+            </p>
+        </div>
+    </div>
+</div>

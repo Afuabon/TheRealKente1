@@ -6,11 +6,12 @@ using TheRealKente.Data;
 
 
 
+
+
 var builder = WebApplication.CreateBuilder(args);
     
 var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'TheRealKenteContext' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(ConnectionString)); 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>options.UseSqlServer(ConnectionString)); 
 
             
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -23,9 +24,22 @@ builder.Services.AddAuth0WebAppAuthentication(options =>
 {
     options.Domain = builder.Configuration["Auth0:Domain"];
     options.ClientId = builder.Configuration["Auth0:ClientId"];
+    options.Scope = "openid profile email";
+    ///options.ClientId = "some_client_id";
+    options.ClientSecret = "PKCE";
+    
+
 });
 
+
+//builder.Services.ConfigureSameSiteNoneCookies();
 var app = builder.Build();
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.None,
+    Secure = CookieSecurePolicy.Always
+});
 
 using (var scope = app.Services.CreateScope())
 {
@@ -35,7 +49,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
 }
@@ -51,13 +65,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();            
+
+app.MapRazorPages();
 
 app.Run(); 
         
